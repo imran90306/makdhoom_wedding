@@ -371,10 +371,9 @@ function makeStarSpawner(section, container) {
   }, { threshold: 0.05 }).observe(section);
 }
 
-/* Hero section — spawn into the dedicated #heroStars layer */
-const heroEl    = document.querySelector('.hero');
-const heroStars = document.getElementById('heroStars');
-if (heroEl && heroStars) makeStarSpawner(heroEl, heroStars);
+/* Verse section (Quran 30:21) */
+const verseEl = document.querySelector('.verse-section');
+if (verseEl) makeStarSpawner(verseEl);
 
 /* Closing section */
 const closingEl = document.querySelector('.closing-section');
