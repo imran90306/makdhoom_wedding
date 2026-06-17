@@ -83,6 +83,15 @@ function burstParty() {
 ════════════════════════════════════════ */
 document.addEventListener("DOMContentLoaded", () => {
   AOS.init({ duration: 900, easing: "ease-out-cubic", once: true, offset: 70 });
+
+  /* Fix: when user jumps via nav link and scrolls back up, sections above
+     the viewport never triggered AOS — force-reveal them so headings don't vanish */
+  function revealAboveViewport() {
+    document.querySelectorAll('[data-aos]').forEach(el => {
+      if (el.getBoundingClientRect().bottom < 0) el.classList.add('aos-animate');
+    });
+  }
+  window.addEventListener('scroll', revealAboveViewport, { passive: true });
 });
 
 /* ════════════════════════════════════════
