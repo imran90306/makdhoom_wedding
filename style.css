@@ -718,6 +718,13 @@ section { position: relative; z-index: 1; padding: 110px 6%; text-align: center;
   margin-bottom: 22px; line-height: 1;
 }
 
+.closing-basmala {
+  font-size: clamp(1.8rem,4.5vw,2.8rem);
+  color: var(--gold-lt); opacity: .65;
+  text-shadow: 0 0 30px rgba(232,196,112,.4);
+  margin: 4px 0 18px; line-height: 1.4;
+}
+
 .closing-ornament {
   display: flex; align-items: center; gap: 16px;
   max-width: 280px; margin: 16px auto;
