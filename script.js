@@ -316,17 +316,17 @@ lightbox.addEventListener("touchend", e => {
 }, { passive: true });
 
 /* ════════════════════════════════════════
-   CLOSING SECTION — stars from all sides
+   EDGE STAR SPAWNER — reusable for any section
+   section  = element to observe (IntersectionObserver)
+   container= element to append stars into (defaults to section)
 ════════════════════════════════════════ */
-(function () {
-  const section = document.querySelector('.closing-section');
-  if (!section) return;
-
+function makeStarSpawner(section, container) {
+  container = container || section;
   const CHARS = ['✦', '✧', '✶', '⋆', '✸', '·', '★'];
   let interval = null;
 
   function spawnStar() {
-    const W = section.offsetWidth, H = section.offsetHeight;
+    const W = container.offsetWidth, H = container.offsetHeight;
     const edge = Math.floor(Math.random() * 4);
     let x, y;
     if      (edge === 0) { x = Math.random() * W; y = -12; }
@@ -334,24 +334,23 @@ lightbox.addEventListener("touchend", e => {
     else if (edge === 2) { x = Math.random() * W; y = H + 12; }
     else                 { x = -12;     y = Math.random() * H; }
 
-    const cx   = W * 0.15 + Math.random() * W * 0.7;
-    const cy   = H * 0.15 + Math.random() * H * 0.7;
-    const dx   = cx - x, dy = cy - y;
-    const dur  = 1600 + Math.random() * 1800;
-    const size = 9  + Math.random() * 13;
-    const rot  = (Math.random() > 0.5 ? 1 : -1) * (360 + Math.random() * 540);
-    const alpha = 0.45 + Math.random() * 0.55;
+    const cx    = W * 0.1 + Math.random() * W * 0.8;
+    const cy    = H * 0.1 + Math.random() * H * 0.8;
+    const dx    = cx - x, dy = cy - y;
+    const dur   = 1600 + Math.random() * 1800;
+    const size  = 9   + Math.random() * 13;
+    const rot   = (Math.random() > 0.5 ? 1 : -1) * (360 + Math.random() * 540);
+    const alpha = 0.4  + Math.random() * 0.6;
 
     const star = document.createElement('span');
     star.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
     star.style.cssText =
       `position:absolute;left:${x}px;top:${y}px;font-size:${size}px;` +
-      `color:rgba(232,196,112,${alpha});pointer-events:none;z-index:0;` +
-      `text-shadow:0 0 10px rgba(232,196,112,.75),0 0 20px rgba(232,196,112,.35);` +
+      `color:rgba(232,196,112,${alpha});pointer-events:none;z-index:1;` +
+      `text-shadow:0 0 10px rgba(232,196,112,.8),0 0 22px rgba(232,196,112,.4);` +
       `opacity:0;transition:transform ${dur}ms ease-out,opacity ${dur * 0.45}ms ease-in;`;
 
-    section.appendChild(star);
-
+    container.appendChild(star);
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         star.style.opacity = '1';
@@ -366,13 +365,17 @@ lightbox.addEventListener("touchend", e => {
 
   new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting && !interval) {
-        spawnStar();
-        interval = setInterval(spawnStar, 260);
-      } else if (!e.isIntersecting && interval) {
-        clearInterval(interval);
-        interval = null;
-      }
+      if (e.isIntersecting && !interval) { spawnStar(); interval = setInterval(spawnStar, 260); }
+      else if (!e.isIntersecting && interval) { clearInterval(interval); interval = null; }
     });
   }, { threshold: 0.05 }).observe(section);
-})();
+}
+
+/* Hero section — spawn into the dedicated #heroStars layer */
+const heroEl    = document.querySelector('.hero');
+const heroStars = document.getElementById('heroStars');
+if (heroEl && heroStars) makeStarSpawner(heroEl, heroStars);
+
+/* Closing section */
+const closingEl = document.querySelector('.closing-section');
+if (closingEl) makeStarSpawner(closingEl);
