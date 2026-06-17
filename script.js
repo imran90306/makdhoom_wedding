@@ -14,10 +14,69 @@ document.addEventListener("DOMContentLoaded", () => {
     cover.classList.add("open");
     document.body.classList.remove("cover-lock");
     setTimeout(() => { cover.remove(); }, 1600);
-    /* Start music on first interaction */
+    burstParty();
     tryPlay();
   });
 });
+
+/* ════════════════════════════════════════
+   PARTY BURST — fires when invitation opens
+════════════════════════════════════════ */
+function burstParty() {
+  const CHARS  = ['✦', '✧', '✶', '⋆', '✸', '★', '✿', '❀', '·'];
+  const COLORS = [
+    'rgba(232,196,112,', 'rgba(255,215,0,',   'rgba(255,255,255,',
+    'rgba(255,182,193,', 'rgba(200,162,200,', 'rgba(135,206,235,'
+  ];
+  const count = 90;
+  const vw = window.innerWidth, vh = window.innerHeight;
+
+  for (let i = 0; i < count; i++) {
+    const el    = document.createElement('span');
+    el.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+
+    /* Start position — random point along one of the 4 edges */
+    const edge  = Math.floor(Math.random() * 4);
+    let sx, sy;
+    if      (edge === 0) { sx = Math.random() * vw; sy = 0; }
+    else if (edge === 1) { sx = vw;                 sy = Math.random() * vh; }
+    else if (edge === 2) { sx = Math.random() * vw; sy = vh; }
+    else                 { sx = 0;                  sy = Math.random() * vh; }
+
+    /* End position — anywhere inside the viewport */
+    const ex = vw * 0.05 + Math.random() * vw * 0.9;
+    const ey = vh * 0.05 + Math.random() * vh * 0.9;
+    const dx = ex - sx, dy = ey - sy;
+
+    const dur   = 1000 + Math.random() * 1400;
+    const delay = Math.random() * 350;
+    const size  = 10  + Math.random() * 18;
+    const rot   = (Math.random() > 0.5 ? 1 : -1) * (360 + Math.random() * 720);
+    const col   = COLORS[Math.floor(Math.random() * COLORS.length)];
+    const alpha = 0.7  + Math.random() * 0.3;
+
+    el.style.cssText =
+      `position:fixed;left:${sx}px;top:${sy}px;font-size:${size}px;` +
+      `color:${col}${alpha});pointer-events:none;z-index:99999;` +
+      `text-shadow:0 0 14px ${col}.9),0 0 28px ${col}.4);` +
+      `opacity:0;transition:transform ${dur}ms ease-out,opacity 180ms ease-in;` +
+      `transition-delay:${delay}ms;`;
+
+    document.body.appendChild(el);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        el.style.opacity = '1';
+        el.style.transform = `translate(${dx}px,${dy}px) rotate(${rot}deg) scale(${0.7 + Math.random() * 0.8})`;
+        setTimeout(() => {
+          el.style.transition = `opacity 500ms ease-out`;
+          el.style.opacity = '0';
+          setTimeout(() => { if (el.parentNode) el.remove(); }, 550);
+        }, delay + dur * 0.55);
+      });
+    });
+  }
+}
 
 /* ════════════════════════════════════════
    AOS

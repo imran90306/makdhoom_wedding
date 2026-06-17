@@ -818,7 +818,7 @@ section { position: relative; z-index: 1; padding: 110px 6%; text-align: center;
 
 .closing-shukran {
   font-family: 'Cormorant Garamond', serif; font-weight: 300;
-  font-size: clamp(2.8rem,8vw,5rem); color: #fff;
+  font-size: clamp(1.6rem,4.5vw,2.5rem); color: #fff;
   letter-spacing: 10px; text-transform: uppercase;
   margin: 4px 0;
   text-shadow: 0 0 80px rgba(232,196,112,.55), 0 0 160px rgba(232,196,112,.2), 0 4px 20px rgba(0,0,0,.6);
@@ -833,8 +833,9 @@ section { position: relative; z-index: 1; padding: 110px 6%; text-align: center;
 
 .closing-names {
   font-family: 'Cormorant Garamond', serif; font-weight: 700;
-  font-size: clamp(2.2rem,6vw,3.6rem); color: #fff;
+  font-size: clamp(1.5rem,4.5vw,2.8rem); color: #fff;
   margin: 22px 0 6px; letter-spacing: 3px;
+  white-space: nowrap;
   text-shadow: 0 0 60px rgba(232,196,112,.45), 0 4px 24px rgba(0,0,0,.5);
 }
 .closing-names span {
