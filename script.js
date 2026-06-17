@@ -246,3 +246,65 @@ lightbox.addEventListener("touchend", e => {
     dx < 0 ? showLb(curIdx + 1, "next") : showLb(curIdx - 1, "prev");
   }
 }, { passive: true });
+
+/* ════════════════════════════════════════
+   CLOSING SECTION — stars from all sides
+════════════════════════════════════════ */
+(function () {
+  const section = document.querySelector('.closing-section');
+  if (!section) return;
+
+  const CHARS = ['✦', '✧', '✶', '⋆', '✸', '·', '★'];
+  let interval = null;
+
+  function spawnStar() {
+    const W = section.offsetWidth, H = section.offsetHeight;
+    const edge = Math.floor(Math.random() * 4);
+    let x, y;
+    if      (edge === 0) { x = Math.random() * W; y = -12; }
+    else if (edge === 1) { x = W + 12;  y = Math.random() * H; }
+    else if (edge === 2) { x = Math.random() * W; y = H + 12; }
+    else                 { x = -12;     y = Math.random() * H; }
+
+    const cx   = W * 0.15 + Math.random() * W * 0.7;
+    const cy   = H * 0.15 + Math.random() * H * 0.7;
+    const dx   = cx - x, dy = cy - y;
+    const dur  = 1600 + Math.random() * 1800;
+    const size = 9  + Math.random() * 13;
+    const rot  = (Math.random() > 0.5 ? 1 : -1) * (360 + Math.random() * 540);
+    const alpha = 0.45 + Math.random() * 0.55;
+
+    const star = document.createElement('span');
+    star.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+    star.style.cssText =
+      `position:absolute;left:${x}px;top:${y}px;font-size:${size}px;` +
+      `color:rgba(232,196,112,${alpha});pointer-events:none;z-index:0;` +
+      `text-shadow:0 0 10px rgba(232,196,112,.75),0 0 20px rgba(232,196,112,.35);` +
+      `opacity:0;transition:transform ${dur}ms ease-out,opacity ${dur * 0.45}ms ease-in;`;
+
+    section.appendChild(star);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        star.style.opacity = '1';
+        star.style.transform = `translate(${dx}px,${dy}px) rotate(${rot}deg) scale(${0.8 + Math.random() * 0.6})`;
+        setTimeout(() => {
+          star.style.opacity = '0';
+          setTimeout(() => { if (star.parentNode) star.remove(); }, 700);
+        }, dur * 0.52);
+      });
+    });
+  }
+
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !interval) {
+        spawnStar();
+        interval = setInterval(spawnStar, 260);
+      } else if (!e.isIntersecting && interval) {
+        clearInterval(interval);
+        interval = null;
+      }
+    });
+  }, { threshold: 0.05 }).observe(section);
+})();
