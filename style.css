@@ -500,7 +500,25 @@ section { position: relative; z-index: 1; padding: 110px 6%; text-align: center;
 }
 .couple-frame:hover { transform: scale(1.05); }
 .couple-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-.groom-frame { box-shadow: 0 0 0 3px var(--black), 0 0 0 5px rgba(13,43,26,.9), 0 0 0 7px rgba(201,150,42,.4), 0 14px 50px rgba(0,0,0,.5); }
+.groom-frame img  { object-position: top center; filter: contrast(1.06) saturate(1.12) brightness(1.03); }
+.groom-frame {
+  background: radial-gradient(ellipse at 50% 15%, #355c45 0%, #1a3825 35%, #0c2018 65%, #06000c 100%);
+  box-shadow:
+    0 0 0 2px #06000c,
+    0 0 0 4px rgba(201,150,42,.6),
+    0 0 0 7px rgba(13,60,30,.85),
+    0 0 0 9px rgba(201,150,42,.2),
+    0 18px 60px rgba(0,0,0,.6),
+    0 0 55px rgba(20,90,50,.4),
+    0 0 100px rgba(20,90,50,.15);
+}
+.groom-frame::after {
+  content: '';
+  position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(100,200,130,.13) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 110%,  rgba(0,0,0,.45)      0%, transparent 55%);
+}
 .bride-frame  { box-shadow: 0 0 0 3px var(--black), 0 0 0 5px rgba(123,26,58,.9), 0 0 0 7px rgba(201,150,42,.4), 0 14px 50px rgba(0,0,0,.5); }
 .couple-frame-badge {
   position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
