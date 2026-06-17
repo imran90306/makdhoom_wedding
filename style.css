@@ -370,6 +370,24 @@ section { position: relative; z-index: 1; padding: 110px 6%; text-align: center;
   font-family: 'Cinzel', serif; font-size: clamp(.78rem,2vw,.96rem);
   letter-spacing: 4px; color: var(--gold-lt);
 }
+.hero-verse {
+  margin: 14px 0 24px;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.hero-verse-arabic {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem,3.5vw,2rem);
+  color: var(--gold-lt); text-shadow: 0 0 30px rgba(232,196,112,.45);
+  direction: rtl; line-height: 1.6;
+}
+.hero-verse-trans {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
+  font-size: clamp(.85rem,2vw,1.05rem); color: rgba(255,255,255,.65);
+}
+.hero-verse-ref {
+  font-family: 'Cinzel', serif; font-size: clamp(.6rem,1.4vw,.72rem);
+  letter-spacing: 2px; color: var(--gold); opacity: .75;
+}
+
 .hero-btn {
   display: inline-flex; align-items: center; gap: 10px;
   font-family: 'Raleway', sans-serif; font-weight: 600;
