@@ -871,17 +871,29 @@ section { position: relative; z-index: 1; padding: 110px 6%; text-align: center;
   text-shadow: 0 0 20px rgba(232,196,112,.4);
 }
 .closing-credit {
-  position: absolute; bottom: 18px; right: 22px;
-  font-family: 'Cinzel', serif; font-size: .6rem;
-  letter-spacing: 2.5px; text-transform: uppercase;
-  background: linear-gradient(90deg, rgba(201,150,42,.55), rgba(232,196,112,.9), rgba(201,150,42,.55));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-  opacity: .75;
-  transition: opacity .4s;
+  position: absolute; bottom: 20px; right: 20px;
+  font-family: 'Cinzel', serif; font-size: .62rem;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold-lt);
+  padding: 6px 14px;
+  border: 1px solid rgba(201,150,42,.35);
+  border-radius: 30px;
+  background: rgba(6,0,12,.55);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 18px rgba(201,150,42,.18), inset 0 1px 0 rgba(232,196,112,.12);
+  text-shadow: 0 0 12px rgba(232,196,112,.6), 0 0 28px rgba(232,196,112,.25);
+  animation: credit-glow 3s ease-in-out infinite alternate;
   cursor: default;
 }
-.closing-credit:hover { opacity: 1; }
+@keyframes credit-glow {
+  from { box-shadow: 0 0 10px rgba(201,150,42,.15), inset 0 1px 0 rgba(232,196,112,.1); border-color: rgba(201,150,42,.3); }
+  to   { box-shadow: 0 0 24px rgba(201,150,42,.4),  inset 0 1px 0 rgba(232,196,112,.2); border-color: rgba(201,150,42,.65); }
+}
+.closing-credit:hover {
+  background: rgba(201,150,42,.12);
+  box-shadow: 0 0 32px rgba(201,150,42,.5), inset 0 1px 0 rgba(232,196,112,.25);
+  border-color: rgba(201,150,42,.8);
+}
 
 /* ══════════════════════════════════════════════
    FOOTER (removed — replaced by closing section)
