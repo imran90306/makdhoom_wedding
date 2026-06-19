@@ -872,7 +872,7 @@ section { position: relative; z-index: 1; padding: 110px 6%; text-align: center;
 }
 .closing-credit {
   position: absolute; bottom: 18px; right: 22px;
-  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: .82rem;
+  font-family: 'Cinzel', serif; font-size: .6rem;
   letter-spacing: 2.5px; text-transform: uppercase;
   background: linear-gradient(90deg, rgba(201,150,42,.55), rgba(232,196,112,.9), rgba(201,150,42,.55));
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
