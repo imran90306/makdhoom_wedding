@@ -225,22 +225,20 @@ navLinks.forEach(a => a.addEventListener("click", () => {
   navMenu.classList.remove("open");
 }));
 
-/* Active link highlight */
-const sections = document.querySelectorAll("section[id]");
-new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
-    }
-  });
-}, { threshold: 0.3, rootMargin: "-60px 0px 0px 0px" }).observe ? sections.forEach(s => {
+/* Active link highlight — top nav + bottom nav */
+const sections  = document.querySelectorAll("section[id]");
+const bnItems   = document.querySelectorAll(".bn-item");
+
+sections.forEach(s => {
   new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting)
-        navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
+      if (!e.isIntersecting) return;
+      const id = "#" + e.target.id;
+      navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === id));
+      bnItems.forEach(a  => a.classList.toggle("active",  a.getAttribute("href") === id));
     });
-  }, { threshold: 0.3, rootMargin: "-60px 0px 0px 0px" }).observe(s);
-}) : null;
+  }, { threshold: 0.35, rootMargin: "-60px 0px 0px 0px" }).observe(s);
+});
 
 /* ════════════════════════════════════════
    GALLERY LIGHTBOX — swipe + back button
