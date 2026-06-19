@@ -870,6 +870,13 @@ section { position: relative; z-index: 1; padding: 110px 6%; text-align: center;
   color: rgba(232,196,112,.85);
   text-shadow: 0 0 20px rgba(232,196,112,.4);
 }
+.closing-credit {
+  font-family: 'Raleway', sans-serif; font-size: .68rem;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,.2);
+  margin: 0; padding: 18px 0 28px;
+  text-align: center;
+}
 
 /* ══════════════════════════════════════════════
    FOOTER (removed — replaced by closing section)
