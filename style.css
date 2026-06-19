@@ -871,12 +871,17 @@ section { position: relative; z-index: 1; padding: 110px 6%; text-align: center;
   text-shadow: 0 0 20px rgba(232,196,112,.4);
 }
 .closing-credit {
-  font-family: 'Raleway', sans-serif; font-size: .68rem;
-  letter-spacing: 2px; text-transform: uppercase;
-  color: rgba(255,255,255,.2);
-  margin: 0; padding: 18px 0 28px;
-  text-align: center;
+  position: absolute; bottom: 18px; right: 22px;
+  font-family: 'Cinzel', serif; font-size: .6rem;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  background: linear-gradient(90deg, rgba(201,150,42,.55), rgba(232,196,112,.9), rgba(201,150,42,.55));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: .75;
+  transition: opacity .4s;
+  cursor: default;
 }
+.closing-credit:hover { opacity: 1; }
 
 /* ══════════════════════════════════════════════
    FOOTER (removed — replaced by closing section)
