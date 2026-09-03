@@ -132,7 +132,7 @@ tsParticles.load("tsparticles", {
 /* ════════════════════════════════════════
    COUNTDOWN
 ════════════════════════════════════════ */
-const weddingDate = new Date("Dec 25, 2026 19:00:00").getTime();
+const weddingDate = new Date("Sep 21, 2026 19:00:00").getTime();
 const pad = n => String(n).padStart(2, "0");
 
 function setFlip(id, val) {
