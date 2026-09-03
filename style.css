@@ -532,6 +532,13 @@ section { position: relative; z-index: 1; padding: 110px 6%; text-align: center;
   font-family: 'Cormorant Garamond', serif; font-weight: 700;
   font-size: clamp(1.1rem,2.5vw,1.4rem); color: white; margin-bottom: 6px;
 }
+.couple-designation {
+  font-family: 'Cinzel', serif; font-size: .65rem;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gold-lt); opacity: .85;
+  margin: 4px 0 6px;
+}
+.couple-designation i { margin-right: 5px; font-size: .7rem; }
 .couple-parent { font-size: .8rem; color: var(--text-dim); margin-bottom: 12px; }
 .couple-tag-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 .couple-tag-row span {
